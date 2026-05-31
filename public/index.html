@@ -306,8 +306,8 @@
 
 <header>
   <span class="emoji">🎰</span>
-  <h1>Family Vegas Trip 2025</h1>
-  <p>Three options for the crew — check them out and cast your vote below!</p>
+  <h1>Family Vegas Trip 2026</h1>
+  <p>Three options for the family, vote for your favorites!</p>
 </header>
 
 <div class="vote-banner">👇 Pick your favorite and vote at the bottom of each card</div>
@@ -486,7 +486,7 @@
     <input type="text" id="voter-name" placeholder="Your name (e.g. Mom, Uncle Rick…)" maxlength="40" />
     <div class="modal-btns">
       <button class="cancel" onclick="closeVote()">Cancel</button>
-      <button class="confirm" onclick="submitVote()">🗳️ Submit Vote</button>
+      <button class="confirm" id="modal-submit" onclick="submitVote()">🗳️ Submit Vote</button>
     </div>
   </div>
 </div>
@@ -509,37 +509,60 @@
     </div>
   </div>
   <div class="voters" id="voters-list"></div>
-  <p class="note">Votes are saved in your browser. Each person should open this on their own device.</p>
+  <p class="note">Votes are shared live with everyone — the tally updates automatically. One vote per name; voting again switches your pick.</p>
 </footer>
 
-<script>
-  // ── State ──
-  const KEY = 'vegas-votes-2025';
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getFirestore, collection, doc, setDoc, onSnapshot
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // ── Firebase config ───────────────────────────────────────────────
+  // Paste your web app config here (Firebase console → Project settings →
+  // "Your apps" → Web app → Config). These values are safe to ship publicly.
+  const firebaseConfig = {
+  apiKey: "AIzaSyBLzqElYp-GX5YlwmOsNWDG3DlhfZn5R0E",
+  authDomain: "vegas-trip-options.firebaseapp.com",
+  projectId: "vegas-trip-options",
+  storageBucket: "vegas-trip-options.firebasestorage.app",
+  messagingSenderId: "1089572453873",
+  appId: "1:1089572453873:web:24fd945053856b13ca1850",
+  measurementId: "G-FDQK5ZMGP2"
+  };
+  // ──────────────────────────────────────────────────────────────────
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const votesCol = collection(db, "votes");
+
   let pendingOption = '';
 
-  function loadVotes() {
-    try { return JSON.parse(localStorage.getItem(KEY)) || { a: [], b: [], c: [] }; }
-    catch { return { a: [], b: [], c: [] }; }
-  }
-
-  function saveVotes(votes) {
-    localStorage.setItem(KEY, JSON.stringify(votes));
-  }
-
-  function render() {
-    const v = loadVotes();
-    document.getElementById('count-a').textContent = v.a.length;
-    document.getElementById('count-b').textContent = v.b.length;
-    document.getElementById('count-c').textContent = v.c.length;
-
-    const all = [
-      ...v.a.map(n => `${n} → A`),
-      ...v.b.map(n => `${n} → B`),
-      ...v.c.map(n => `${n} → C`),
-    ];
+  function render(docs) {
+    const counts = { a: 0, b: 0, c: 0 };
+    const voters = [];
+    docs.forEach(d => {
+      const { name, option } = d.data();
+      if (counts[option] === undefined) return;
+      counts[option]++;
+      voters.push(`${name} → ${option.toUpperCase()}`);
+    });
+    document.getElementById('count-a').textContent = counts.a;
+    document.getElementById('count-b').textContent = counts.b;
+    document.getElementById('count-c').textContent = counts.c;
     const el = document.getElementById('voters-list');
-    el.textContent = all.length ? 'Voted: ' + all.join(' · ') : 'No votes yet — be the first!';
+    el.textContent = voters.length ? 'Voted: ' + voters.join(' · ') : 'No votes yet — be the first!';
   }
+
+  // Live listener — every open page updates the moment anyone votes.
+  onSnapshot(votesCol,
+    snap => render(snap.docs),
+    err => {
+      console.error('Firestore listen failed:', err);
+      document.getElementById('voters-list').textContent =
+        '⚠️ Could not load live votes — check Firestore is enabled & rules allow read.';
+    }
+  );
 
   // ── Modal ──
   function openVote(option) {
@@ -555,23 +578,33 @@
     pendingOption = '';
   }
 
-  function submitVote() {
-    const name = document.getElementById('voter-name').value.trim();
-    if (!name) { document.getElementById('voter-name').focus(); return; }
+  async function submitVote() {
+    const input = document.getElementById('voter-name');
+    const name = input.value.trim();
+    if (!name) { input.focus(); return; }
 
-    const key = pendingOption.startsWith('Option A') ? 'a'
-               : pendingOption.startsWith('Option B') ? 'b' : 'c';
+    const option = pendingOption.startsWith('Option A') ? 'a'
+                 : pendingOption.startsWith('Option B') ? 'b' : 'c';
 
-    const votes = loadVotes();
-    // remove any prior vote from this name
-    ['a','b','c'].forEach(k => {
-      votes[k] = votes[k].filter(n => n.toLowerCase() !== name.toLowerCase());
-    });
-    votes[key].push(name);
-    saveVotes(votes);
-    render();
-    closeVote();
+    // Doc id = lowercased name → re-voting overwrites (one vote per person).
+    const id = name.toLowerCase();
+    const btn = document.getElementById('modal-submit');
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+    try {
+      await setDoc(doc(db, "votes", id), { name, option });
+      closeVote();
+    } catch (e) {
+      console.error('Vote failed:', e);
+      alert('Sorry — your vote could not be saved. Please try again.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '🗳️ Submit Vote'; }
+    }
   }
+
+  // Expose for inline onclick handlers (module scope is not global).
+  window.openVote = openVote;
+  window.closeVote = closeVote;
+  window.submitVote = submitVote;
 
   // close on backdrop click
   document.getElementById('modal').addEventListener('click', e => {
@@ -582,8 +615,6 @@
   document.getElementById('voter-name').addEventListener('keydown', e => {
     if (e.key === 'Enter') submitVote();
   });
-
-  render();
 </script>
 </body>
 </html>
