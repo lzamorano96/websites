@@ -339,18 +339,31 @@
       padding: 1.75rem 1.5rem;
       text-align: center;
     }
-    .countdown .cd-num {
-      font-size: clamp(2.5rem, 9vw, 4.5rem);
+    .countdown .cd-timer {
+      display: flex;
+      justify-content: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .countdown .cd-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 62px;
+    }
+    .countdown .cd-val {
+      font-size: clamp(1.9rem, 7vw, 3.4rem);
       font-weight: 800;
       color: var(--gold);
       line-height: 1;
+      font-variant-numeric: tabular-nums;
     }
-    .countdown .cd-label {
+    .countdown .cd-u {
       text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: .8rem;
-      color: var(--text);
-      margin-top: .5rem;
+      letter-spacing: 1.5px;
+      font-size: .68rem;
+      color: var(--muted);
+      margin-top: .4rem;
     }
     .countdown .cd-date {
       color: var(--muted);
@@ -412,8 +425,8 @@
     <div class="breakdown">
       <h3>Estimated Cost Breakdown</h3>
       <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$483</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>TBD</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>TBD</span></div>
+      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
+      <div class="breakdown-row total"><span>Total per couple</span><span>$483</span></div>
     </div>
 
     <button class="vote-btn budget-btn" onclick="openVote('Hotel A – Planet Hollywood')">👍 Vote for This One</button>
@@ -460,8 +473,8 @@
     <div class="breakdown">
       <h3>Estimated Cost Breakdown</h3>
       <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$303</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>TBD</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>TBD</span></div>
+      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
+      <div class="breakdown-row total"><span>Total per couple</span><span>$303</span></div>
     </div>
 
     <button class="vote-btn popular-btn" onclick="openVote('Hotel B – The Flamingo')">👍 Vote for This One</button>
@@ -508,8 +521,8 @@
     <div class="breakdown">
       <h3>Estimated Cost Breakdown</h3>
       <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$481</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>TBD</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>TBD</span></div>
+      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
+      <div class="breakdown-row total"><span>Total per couple</span><span>$481</span></div>
     </div>
 
     <button class="vote-btn premium-btn" onclick="openVote('Hotel C – New York, New York')">👍 Vote for This One</button>
@@ -520,22 +533,35 @@
 <!-- ── Countdown to the trip ── -->
 <section class="countdown">
   <div class="cd-card">
-    <div class="cd-num" id="cd-num">—</div>
-    <div class="cd-label" id="cd-label">days until Vegas</div>
-    <div class="cd-date">🎰 Thursday, August 20, 2026</div>
+    <div class="cd-timer" id="cd-timer">
+      <div class="cd-unit"><span class="cd-val" id="cd-days">--</span><span class="cd-u">days</span></div>
+      <div class="cd-unit"><span class="cd-val" id="cd-hours">--</span><span class="cd-u">hrs</span></div>
+      <div class="cd-unit"><span class="cd-val" id="cd-mins">--</span><span class="cd-u">min</span></div>
+      <div class="cd-unit"><span class="cd-val" id="cd-secs">--</span><span class="cd-u">sec</span></div>
+    </div>
+    <div class="cd-date">🎰 until Vegas · Thursday, August 20, 2026</div>
   </div>
 </section>
 <script>
   (function () {
-    var target = new Date(2026, 7, 20); // Aug 20, 2026 (month is 0-indexed)
-    var now = new Date(); now.setHours(0, 0, 0, 0);
-    var days = Math.round((target - now) / 86400000);
-    var num = document.getElementById('cd-num');
-    var label = document.getElementById('cd-label');
-    if (days > 1) { num.textContent = days; label.textContent = 'days until Vegas'; }
-    else if (days === 1) { num.textContent = '1'; label.textContent = 'day until Vegas'; }
-    else if (days === 0) { num.textContent = '🎉'; label.textContent = "It's Vegas day!"; }
-    else { num.textContent = '🎰'; label.textContent = 'Hope Vegas was a blast!'; }
+    var target = new Date(2026, 7, 20, 0, 0, 0).getTime(); // Aug 20, 2026 (month 0-indexed)
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      var diff = target - Date.now();
+      var d = 0, h = 0, m = 0, s = 0;
+      if (diff > 0) {
+        d = Math.floor(diff / 86400000);
+        h = Math.floor((diff % 86400000) / 3600000);
+        m = Math.floor((diff % 3600000) / 60000);
+        s = Math.floor((diff % 60000) / 1000);
+      }
+      document.getElementById('cd-days').textContent = d;
+      document.getElementById('cd-hours').textContent = pad(h);
+      document.getElementById('cd-mins').textContent = pad(m);
+      document.getElementById('cd-secs').textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
   })();
 </script>
 
