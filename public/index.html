@@ -95,9 +95,14 @@
       box-shadow: 0 12px 40px rgba(0,0,0,.5);
     }
     .card.featured {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 1px var(--gold), 0 8px 30px rgba(240,192,64,.15);
+      border-color: #ff6fa3;
+      box-shadow: 0 0 0 1px #ff6fa3, 0 8px 30px rgba(255,111,163,.18);
     }
+
+    /* per-hotel accent themes */
+    .theme-ph { --theme: #b086f0; }  /* Planet Hollywood — purple */
+    .theme-fl { --theme: #ff6fa3; }  /* The Flamingo — flamingo pink */
+    .theme-ny { --theme: #5cc2a0; }  /* New York New York — Liberty green */
 
     /* card header strip */
     .card-header {
@@ -115,9 +120,9 @@
       border-radius: 999px;
       margin-bottom: .6rem;
     }
-    .badge.budget   { background: #1a3a2a; color: #4caf8a; }
-    .badge.popular  { background: #3a2a10; color: var(--gold); }
-    .badge.premium  { background: #2a1030; color: #b086f0; }
+    .badge.budget   { background: #241433; color: #b086f0; }
+    .badge.popular  { background: #3a1228; color: #ff6fa3; }
+    .badge.premium  { background: #0f342b; color: #5cc2a0; }
 
     .card-header h2 {
       font-size: 1.35rem;
@@ -141,7 +146,7 @@
     .price-block .amount {
       font-size: 2.4rem;
       font-weight: 800;
-      color: var(--gold);
+      color: var(--theme, var(--gold));
       line-height: 1;
     }
     .price-block .per {
@@ -181,19 +186,19 @@
       color: var(--text);
       font-weight: 600;
       text-decoration: none;
-      border-bottom: 1px dashed rgba(240,192,64,.35);
+      border-bottom: 1px dashed rgba(255,255,255,.22);
       transition: color .15s ease, border-color .15s ease;
     }
     .hotel-link:hover {
-      color: var(--gold);
-      border-bottom-color: var(--gold);
+      color: var(--theme, var(--gold));
+      border-bottom-color: var(--theme, var(--gold));
     }
     .hotel-link .visit-cue {
       margin-left: .4rem;
       font-size: .72em;
       font-weight: 700;
       letter-spacing: .5px;
-      color: var(--gold);
+      color: var(--theme, var(--gold));
       white-space: nowrap;
       opacity: 0;
       transform: translateX(-4px);
@@ -246,9 +251,9 @@
     }
     .vote-btn:hover { opacity: .85; transform: scale(.99); }
     .vote-btn:active { transform: scale(.97); }
-    .vote-btn.budget-btn  { background: #4caf8a; color: #000; }
-    .vote-btn.popular-btn { background: var(--gold); color: #000; }
-    .vote-btn.premium-btn { background: #b086f0; color: #000; }
+    .vote-btn.budget-btn  { background: #b086f0; color: #000; }
+    .vote-btn.popular-btn { background: #ff6fa3; color: #000; }
+    .vote-btn.premium-btn { background: #5cc2a0; color: #000; }
 
     /* ── Vote modal ── */
     .modal-overlay {
@@ -328,15 +333,15 @@
     }
     /* ── Countdown ── */
     .countdown {
-      max-width: 1100px;
+      max-width: 540px;
       margin: 0 auto;
-      padding: 0 1.25rem 3rem;
+      padding: 1.75rem 1.25rem 1.25rem;
     }
     .countdown .cd-card {
       background: linear-gradient(135deg, rgba(240,192,64,.12), rgba(233,69,96,.12));
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 1.75rem 1.5rem;
+      padding: 1.1rem 1.25rem;
       text-align: center;
     }
     .countdown .cd-timer {
@@ -352,7 +357,7 @@
       min-width: 62px;
     }
     .countdown .cd-val {
-      font-size: clamp(1.9rem, 7vw, 3.4rem);
+      font-size: clamp(2.3rem, 8vw, 3.9rem);
       font-weight: 800;
       color: var(--gold);
       line-height: 1;
@@ -379,141 +384,6 @@
   <h1>Family Vegas Trip 2026</h1>
   <p>Three options for the family, vote for your favorites!</p>
 </header>
-
-<div class="vote-banner">👇 Pick your favorite and vote at the bottom of each card</div>
-
-<main>
-
-  <!-- ── OPTION 1: Budget ── -->
-  <div class="card">
-    <div class="card-header">
-      <span class="badge budget">Hotel A</span>
-      <h2><a class="hotel-link" href="https://www.google.com/search?q=Planet+Hollywood+Las+Vegas" target="_blank" rel="noopener" title="Search Google for Planet Hollywood">Planet Hollywood<span class="visit-cue">Visit ↗</span></a></h2>
-      <div class="subtitle"><span style="color:var(--gold)">★★★★</span> 4-star</div>
-    </div>
-
-    <div class="price-block">
-      <div class="amount">$483</div>
-      <div class="per">per couple<br><span style="color:#4caf8a;font-weight:700">hotel · 3 nights</span></div>
-    </div>
-
-    <div class="details">
-      <h3>Trip Details</h3>
-
-      <div class="detail-row">
-        <span class="icon">📅</span>
-        <span class="label">Dates</span>
-        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
-      </div>
-      <div class="detail-row">
-        <span class="icon">🛏️</span>
-        <span class="label">Room</span>
-        <span class="value">Two queens · 2 guests</span>
-      </div>
-      <div class="detail-row">
-        <span class="icon">⭐</span>
-        <span class="label">Perks</span>
-        <span class="value">TBD</span>
-      </div>
-    </div>
-
-    <div class="breakdown">
-      <h3>Estimated Cost Breakdown</h3>
-      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$483</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>$483</span></div>
-    </div>
-
-    <button class="vote-btn budget-btn" onclick="openVote('Hotel A – Planet Hollywood')">👍 Vote for This One</button>
-  </div>
-
-  <!-- ── OPTION 2: Mid-range (Featured) ── -->
-  <div class="card featured">
-    <div class="card-header">
-      <span class="badge popular">Hotel B</span>
-      <h2><a class="hotel-link" href="https://www.google.com/search?q=Flamingo+Las+Vegas" target="_blank" rel="noopener" title="Search Google for The Flamingo">The Flamingo<span class="visit-cue">Visit ↗</span></a></h2>
-      <div class="subtitle"><span style="color:var(--gold)">★★★</span> 3-star</div>
-    </div>
-
-    <div class="price-block">
-      <div class="amount">$303</div>
-      <div class="per">per couple<br><span style="color:var(--gold);font-weight:700">hotel · 3 nights</span></div>
-    </div>
-
-    <div class="details">
-      <h3>Trip Details</h3>
-
-      <div class="detail-row">
-        <span class="icon">📅</span>
-        <span class="label">Dates</span>
-        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
-      </div>
-      <div class="detail-row">
-        <span class="icon">🛏️</span>
-        <span class="label">Room</span>
-        <span class="value">Two queens · 2 guests</span>
-      </div>
-      <div class="detail-row">
-        <span class="icon">⭐</span>
-        <span class="label">Perks</span>
-        <span class="value">TBD</span>
-      </div>
-    </div>
-
-    <div class="breakdown">
-      <h3>Estimated Cost Breakdown</h3>
-      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$303</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>$303</span></div>
-    </div>
-
-    <button class="vote-btn popular-btn" onclick="openVote('Hotel B – The Flamingo')">👍 Vote for This One</button>
-  </div>
-
-  <!-- ── OPTION 3: Premium ── -->
-  <div class="card">
-    <div class="card-header">
-      <span class="badge premium">Hotel C</span>
-      <h2><a class="hotel-link" href="https://www.google.com/search?q=New+York+New+York+Las+Vegas" target="_blank" rel="noopener" title="Search Google for New York, New York">New York, New York<span class="visit-cue">Visit ↗</span></a></h2>
-      <div class="subtitle"><span style="color:var(--gold)">★★★★</span> 4-star</div>
-    </div>
-
-    <div class="price-block">
-      <div class="amount">$481</div>
-      <div class="per">per couple<br><span style="color:#b086f0;font-weight:700">hotel · 3 nights</span></div>
-    </div>
-
-    <div class="details">
-      <h3>Trip Details</h3>
-
-      <div class="detail-row">
-        <span class="icon">📅</span>
-        <span class="label">Dates</span>
-        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
-      </div>
-      <div class="detail-row">
-        <span class="icon">🛏️</span>
-        <span class="label">Room</span>
-        <span class="value">Two queens · 2 guests</span>
-      </div>
-      <div class="detail-row">
-        <span class="icon">⭐</span>
-        <span class="label">Perks</span>
-        <span class="value">TBD</span>
-      </div>
-    </div>
-
-    <div class="breakdown">
-      <h3>Estimated Cost Breakdown</h3>
-      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$481</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>$481</span></div>
-    </div>
-
-    <button class="vote-btn premium-btn" onclick="openVote('Hotel C – New York, New York')">👍 Vote for This One</button>
-  </div>
-
-</main>
 
 <!-- ── Countdown to the trip ── -->
 <section class="countdown">
@@ -549,6 +419,141 @@
     setInterval(tick, 1000);
   })();
 </script>
+
+<div class="vote-banner">👇 Pick your favorite and vote at the bottom of each card</div>
+
+<main>
+
+  <!-- ── OPTION 1: Budget ── -->
+  <div class="card theme-ph">
+    <div class="card-header">
+      <span class="badge budget">Hotel A</span>
+      <h2><a class="hotel-link" href="https://www.google.com/search?q=Planet+Hollywood+Las+Vegas" target="_blank" rel="noopener" title="Search Google for Planet Hollywood">Planet Hollywood<span class="visit-cue">Visit ↗</span></a></h2>
+      <div class="subtitle"><span style="color:var(--theme)">★★★★</span> 4-star</div>
+    </div>
+
+    <div class="price-block">
+      <div class="amount">$483</div>
+      <div class="per">per couple<br><span style="color:var(--theme);font-weight:700">3 nights (includes taxes)</span></div>
+    </div>
+
+    <div class="details">
+      <h3>Trip Details</h3>
+
+      <div class="detail-row">
+        <span class="icon">📅</span>
+        <span class="label">Dates</span>
+        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
+      </div>
+      <div class="detail-row">
+        <span class="icon">🛏️</span>
+        <span class="label">Room</span>
+        <span class="value">Two queens · 2 guests</span>
+      </div>
+      <div class="detail-row">
+        <span class="icon">⭐</span>
+        <span class="label">Perks</span>
+        <span class="value">TBD</span>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h3>Estimated Cost Breakdown</h3>
+      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$483</span></div>
+      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
+      <div class="breakdown-row total"><span>Total per couple</span><span>$483</span></div>
+    </div>
+
+    <button class="vote-btn budget-btn" onclick="openVote('Hotel A – Planet Hollywood')">👍 Vote for This One</button>
+  </div>
+
+  <!-- ── OPTION 2: Mid-range (Featured) ── -->
+  <div class="card featured theme-fl">
+    <div class="card-header">
+      <span class="badge popular">Hotel B</span>
+      <h2><a class="hotel-link" href="https://www.google.com/search?q=Flamingo+Las+Vegas" target="_blank" rel="noopener" title="Search Google for The Flamingo">The Flamingo<span class="visit-cue">Visit ↗</span></a></h2>
+      <div class="subtitle"><span style="color:var(--theme)">★★★</span> 3-star</div>
+    </div>
+
+    <div class="price-block">
+      <div class="amount">$303</div>
+      <div class="per">per couple<br><span style="color:var(--theme);font-weight:700">hotel · 3 nights</span></div>
+    </div>
+
+    <div class="details">
+      <h3>Trip Details</h3>
+
+      <div class="detail-row">
+        <span class="icon">📅</span>
+        <span class="label">Dates</span>
+        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
+      </div>
+      <div class="detail-row">
+        <span class="icon">🛏️</span>
+        <span class="label">Room</span>
+        <span class="value">Two queens · 2 guests</span>
+      </div>
+      <div class="detail-row">
+        <span class="icon">⭐</span>
+        <span class="label">Perks</span>
+        <span class="value">TBD</span>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h3>Estimated Cost Breakdown</h3>
+      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$303</span></div>
+      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
+      <div class="breakdown-row total"><span>Total per couple</span><span>$303</span></div>
+    </div>
+
+    <button class="vote-btn popular-btn" onclick="openVote('Hotel B – The Flamingo')">👍 Vote for This One</button>
+  </div>
+
+  <!-- ── OPTION 3: Premium ── -->
+  <div class="card theme-ny">
+    <div class="card-header">
+      <span class="badge premium">Hotel C</span>
+      <h2><a class="hotel-link" href="https://www.google.com/search?q=New+York+New+York+Las+Vegas" target="_blank" rel="noopener" title="Search Google for New York, New York">New York, New York<span class="visit-cue">Visit ↗</span></a></h2>
+      <div class="subtitle"><span style="color:var(--theme)">★★★★</span> 4-star</div>
+    </div>
+
+    <div class="price-block">
+      <div class="amount">$481</div>
+      <div class="per">per couple<br><span style="color:var(--theme);font-weight:700">hotel · 3 nights</span></div>
+    </div>
+
+    <div class="details">
+      <h3>Trip Details</h3>
+
+      <div class="detail-row">
+        <span class="icon">📅</span>
+        <span class="label">Dates</span>
+        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
+      </div>
+      <div class="detail-row">
+        <span class="icon">🛏️</span>
+        <span class="label">Room</span>
+        <span class="value">Two queens · 2 guests</span>
+      </div>
+      <div class="detail-row">
+        <span class="icon">⭐</span>
+        <span class="label">Perks</span>
+        <span class="value">TBD</span>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h3>Estimated Cost Breakdown</h3>
+      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$481</span></div>
+      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
+      <div class="breakdown-row total"><span>Total per couple</span><span>$481</span></div>
+    </div>
+
+    <button class="vote-btn premium-btn" onclick="openVote('Hotel C – New York, New York')">👍 Vote for This One</button>
+  </div>
+
+</main>
 
 <!-- ── Vote Modal ── -->
 <div class="modal-overlay" id="modal">
