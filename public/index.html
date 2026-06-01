@@ -58,6 +58,22 @@
       max-width: 480px;
       margin-inline: auto;
     }
+    .lang-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 5;
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .4rem .85rem;
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .lang-toggle:hover { background: rgba(255,255,255,.16); border-color: var(--gold); }
 
     /* ── Vote banner ── */
     .vote-banner {
@@ -387,24 +403,25 @@
 <body>
 
 <header>
+  <button id="lang-toggle" class="lang-toggle" type="button">🌐 Español</button>
   <span class="emoji">🎰</span>
-  <h1>Family Vegas Trip 2026</h1>
-  <p>Three options for the family, vote for your favorites!</p>
+  <h1 data-i18n="heroTitle">Family Vegas Trip 2026</h1>
+  <p data-i18n="heroSub">Three options for the family, vote for your favorites!</p>
 </header>
 
 <!-- ── Countdown to the trip ── -->
 <section class="countdown">
   <div class="cd-card">
     <div class="cd-timer" id="cd-timer">
-      <div class="cd-unit"><span class="cd-val" id="cd-days">--</span><span class="cd-u">days</span></div>
+      <div class="cd-unit"><span class="cd-val" id="cd-days">--</span><span class="cd-u" data-i18n="cdDays">days</span></div>
       <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-val" id="cd-hours">--</span><span class="cd-u">hrs</span></div>
+      <div class="cd-unit"><span class="cd-val" id="cd-hours">--</span><span class="cd-u" data-i18n="cdHrs">hrs</span></div>
       <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-val" id="cd-mins">--</span><span class="cd-u">min</span></div>
+      <div class="cd-unit"><span class="cd-val" id="cd-mins">--</span><span class="cd-u" data-i18n="cdMin">min</span></div>
       <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-val" id="cd-secs">--</span><span class="cd-u">sec</span></div>
+      <div class="cd-unit"><span class="cd-val" id="cd-secs">--</span><span class="cd-u" data-i18n="cdSec">sec</span></div>
     </div>
-    <div class="cd-date">🎰 until Vegas · Thursday, August 20, 2026</div>
+    <div class="cd-date" data-i18n="cdDate">🎰 until Vegas · Thursday, August 20, 2026</div>
   </div>
 </section>
 <script>
@@ -430,7 +447,7 @@
   })();
 </script>
 
-<div class="vote-banner">👇 Pick your favorite and vote at the bottom of each card</div>
+<div class="vote-banner" data-i18n="banner">👇 Pick your favorite and vote at the bottom of each card</div>
 
 <main>
 
@@ -438,129 +455,129 @@
   <div class="card theme-ph">
     <div class="card-header">
       <span class="badge budget">Hotel A</span>
-      <h2><a class="hotel-link" href="https://www.google.com/search?q=Planet+Hollywood+Las+Vegas" target="_blank" rel="noopener" title="Search Google for Planet Hollywood">Planet Hollywood<span class="visit-cue">Visit ↗</span></a></h2>
-      <div class="subtitle"><span style="color:var(--theme)">★★★★</span> 4-star</div>
+      <h2><a class="hotel-link" href="https://www.google.com/search?q=Planet+Hollywood+Las+Vegas" target="_blank" rel="noopener" title="Search Google for Planet Hollywood" data-i18n-title="titlePH">Planet Hollywood<span class="visit-cue" data-i18n="visit">Visit ↗</span></a></h2>
+      <div class="subtitle"><span style="color:var(--theme)">★★★★</span> <span data-i18n="star4">4-star</span></div>
     </div>
 
     <div class="price-block">
       <div class="amount">$483</div>
-      <div class="per">per couple<br><span style="color:var(--theme);font-weight:700">3 nights (includes taxes)</span></div>
+      <div class="per"><span data-i18n="perCouple">per couple</span><br><span style="color:var(--theme);font-weight:700" data-i18n="priceNoteTax">3 nights (includes taxes)</span></div>
     </div>
 
     <div class="details">
-      <h3>Trip Details</h3>
+      <h3 data-i18n="tripDetails">Trip Details</h3>
 
       <div class="detail-row">
         <span class="icon">📅</span>
-        <span class="label">Dates</span>
-        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
+        <span class="label" data-i18n="lblDates">Dates</span>
+        <span class="value" data-i18n="valDates">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
       </div>
       <div class="detail-row">
         <span class="icon">🛏️</span>
-        <span class="label">Room</span>
-        <span class="value">Two queens · 2 guests</span>
+        <span class="label" data-i18n="lblRoom">Room</span>
+        <span class="value" data-i18n="valRoom">Two queens · 2 guests</span>
       </div>
       <div class="detail-row">
         <span class="icon">⭐</span>
-        <span class="label">Perks</span>
-        <span class="value">TBD</span>
+        <span class="label" data-i18n="lblPerks">Perks</span>
+        <span class="value" data-i18n="valPerks">TBD</span>
       </div>
     </div>
 
     <div class="breakdown">
-      <h3>Estimated Cost Breakdown</h3>
-      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$483</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>$483</span></div>
+      <h3 data-i18n="breakdownTitle">Estimated Cost Breakdown</h3>
+      <div class="breakdown-row"><span data-i18n="bdHotel">Hotel (3 nights)</span><span>$483</span></div>
+      <div class="breakdown-row"><span data-i18n="bdFood">Food &amp; Entertainment est.</span><span data-i18n="bdFoodVal">not yet added</span></div>
+      <div class="breakdown-row total"><span data-i18n="bdTotal">Total per couple</span><span>$483</span></div>
     </div>
 
-    <button class="vote-btn budget-btn" onclick="openVote('Hotel A – Planet Hollywood')">👍 Vote for This One</button>
+    <button class="vote-btn budget-btn" onclick="openVote('Hotel A – Planet Hollywood')" data-i18n="voteBtn">👍 Vote for This One</button>
   </div>
 
   <!-- ── OPTION 2: Mid-range (Featured) ── -->
   <div class="card featured theme-fl">
     <div class="card-header">
       <span class="badge popular">Hotel B</span>
-      <h2><a class="hotel-link" href="https://www.google.com/search?q=Flamingo+Las+Vegas" target="_blank" rel="noopener" title="Search Google for The Flamingo">The Flamingo<span class="visit-cue">Visit ↗</span></a></h2>
-      <div class="subtitle"><span style="color:var(--theme)">★★★</span> 3-star</div>
+      <h2><a class="hotel-link" href="https://www.google.com/search?q=Flamingo+Las+Vegas" target="_blank" rel="noopener" title="Search Google for The Flamingo" data-i18n-title="titleFL">The Flamingo<span class="visit-cue" data-i18n="visit">Visit ↗</span></a></h2>
+      <div class="subtitle"><span style="color:var(--theme)">★★★</span> <span data-i18n="star3">3-star</span></div>
     </div>
 
     <div class="price-block">
       <div class="amount">$303</div>
-      <div class="per">per couple<br><span style="color:var(--theme);font-weight:700">hotel · 3 nights</span></div>
+      <div class="per"><span data-i18n="perCouple">per couple</span><br><span style="color:var(--theme);font-weight:700" data-i18n="priceNote">hotel · 3 nights</span></div>
     </div>
 
     <div class="details">
-      <h3>Trip Details</h3>
+      <h3 data-i18n="tripDetails">Trip Details</h3>
 
       <div class="detail-row">
         <span class="icon">📅</span>
-        <span class="label">Dates</span>
-        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
+        <span class="label" data-i18n="lblDates">Dates</span>
+        <span class="value" data-i18n="valDates">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
       </div>
       <div class="detail-row">
         <span class="icon">🛏️</span>
-        <span class="label">Room</span>
-        <span class="value">Two queens · 2 guests</span>
+        <span class="label" data-i18n="lblRoom">Room</span>
+        <span class="value" data-i18n="valRoom">Two queens · 2 guests</span>
       </div>
       <div class="detail-row">
         <span class="icon">⭐</span>
-        <span class="label">Perks</span>
-        <span class="value">TBD</span>
+        <span class="label" data-i18n="lblPerks">Perks</span>
+        <span class="value" data-i18n="valPerks">TBD</span>
       </div>
     </div>
 
     <div class="breakdown">
-      <h3>Estimated Cost Breakdown</h3>
-      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$303</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>$303</span></div>
+      <h3 data-i18n="breakdownTitle">Estimated Cost Breakdown</h3>
+      <div class="breakdown-row"><span data-i18n="bdHotel">Hotel (3 nights)</span><span>$303</span></div>
+      <div class="breakdown-row"><span data-i18n="bdFood">Food &amp; Entertainment est.</span><span data-i18n="bdFoodVal">not yet added</span></div>
+      <div class="breakdown-row total"><span data-i18n="bdTotal">Total per couple</span><span>$303</span></div>
     </div>
 
-    <button class="vote-btn popular-btn" onclick="openVote('Hotel B – The Flamingo')">👍 Vote for This One</button>
+    <button class="vote-btn popular-btn" onclick="openVote('Hotel B – The Flamingo')" data-i18n="voteBtn">👍 Vote for This One</button>
   </div>
 
   <!-- ── OPTION 3: Premium ── -->
   <div class="card theme-ny">
     <div class="card-header">
       <span class="badge premium">Hotel C</span>
-      <h2><a class="hotel-link" href="https://www.google.com/search?q=New+York+New+York+Las+Vegas" target="_blank" rel="noopener" title="Search Google for New York, New York">New York, New York<span class="visit-cue">Visit ↗</span></a></h2>
-      <div class="subtitle"><span style="color:var(--theme)">★★★★</span> 4-star</div>
+      <h2><a class="hotel-link" href="https://www.google.com/search?q=New+York+New+York+Las+Vegas" target="_blank" rel="noopener" title="Search Google for New York, New York" data-i18n-title="titleNY">New York, New York<span class="visit-cue" data-i18n="visit">Visit ↗</span></a></h2>
+      <div class="subtitle"><span style="color:var(--theme)">★★★★</span> <span data-i18n="star4">4-star</span></div>
     </div>
 
     <div class="price-block">
       <div class="amount">$481</div>
-      <div class="per">per couple<br><span style="color:var(--theme);font-weight:700">hotel · 3 nights</span></div>
+      <div class="per"><span data-i18n="perCouple">per couple</span><br><span style="color:var(--theme);font-weight:700" data-i18n="priceNote">hotel · 3 nights</span></div>
     </div>
 
     <div class="details">
-      <h3>Trip Details</h3>
+      <h3 data-i18n="tripDetails">Trip Details</h3>
 
       <div class="detail-row">
         <span class="icon">📅</span>
-        <span class="label">Dates</span>
-        <span class="value">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
+        <span class="label" data-i18n="lblDates">Dates</span>
+        <span class="value" data-i18n="valDates">Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)</span>
       </div>
       <div class="detail-row">
         <span class="icon">🛏️</span>
-        <span class="label">Room</span>
-        <span class="value">Two queens · 2 guests</span>
+        <span class="label" data-i18n="lblRoom">Room</span>
+        <span class="value" data-i18n="valRoom">Two queens · 2 guests</span>
       </div>
       <div class="detail-row">
         <span class="icon">⭐</span>
-        <span class="label">Perks</span>
-        <span class="value">TBD</span>
+        <span class="label" data-i18n="lblPerks">Perks</span>
+        <span class="value" data-i18n="valPerks">TBD</span>
       </div>
     </div>
 
     <div class="breakdown">
-      <h3>Estimated Cost Breakdown</h3>
-      <div class="breakdown-row"><span>Hotel (3 nights)</span><span>$481</span></div>
-      <div class="breakdown-row"><span>Food &amp; Entertainment est.</span><span>not yet added</span></div>
-      <div class="breakdown-row total"><span>Total per couple</span><span>$481</span></div>
+      <h3 data-i18n="breakdownTitle">Estimated Cost Breakdown</h3>
+      <div class="breakdown-row"><span data-i18n="bdHotel">Hotel (3 nights)</span><span>$481</span></div>
+      <div class="breakdown-row"><span data-i18n="bdFood">Food &amp; Entertainment est.</span><span data-i18n="bdFoodVal">not yet added</span></div>
+      <div class="breakdown-row total"><span data-i18n="bdTotal">Total per couple</span><span>$481</span></div>
     </div>
 
-    <button class="vote-btn premium-btn" onclick="openVote('Hotel C – New York, New York')">👍 Vote for This One</button>
+    <button class="vote-btn premium-btn" onclick="openVote('Hotel C – New York, New York')" data-i18n="voteBtn">👍 Vote for This One</button>
   </div>
 
 </main>
@@ -568,19 +585,19 @@
 <!-- ── Vote Modal ── -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
-    <h2>Cast Your Vote</h2>
-    <p id="modal-option-text">You're voting for…</p>
-    <input type="text" id="voter-name" placeholder="Your name (e.g. Mom, Uncle Rick…)" maxlength="40" />
+    <h2 data-i18n="modalTitle">Cast Your Vote</h2>
+    <p id="modal-option-text" data-i18n="votingForDefault">You're voting for…</p>
+    <input type="text" id="voter-name" data-i18n-placeholder="namePlaceholder" placeholder="Your name (e.g. Mom, Uncle Rick…)" maxlength="40" />
     <div class="modal-btns">
-      <button class="cancel" onclick="closeVote()">Cancel</button>
-      <button class="confirm" id="modal-submit" onclick="submitVote()">🗳️ Submit Vote</button>
+      <button class="cancel" onclick="closeVote()" data-i18n="cancel">Cancel</button>
+      <button class="confirm" id="modal-submit" onclick="submitVote()" data-i18n="submit">🗳️ Submit Vote</button>
     </div>
   </div>
 </div>
 
 <!-- ── Vote Tally Footer ── -->
 <footer>
-  <h2>🗳️ Family Vote Tally</h2>
+  <h2 data-i18n="tallyTitle">🗳️ Family Vote Tally</h2>
   <div class="tally">
     <div class="tally-item budget">
       <span class="count" id="count-a">0</span>
@@ -596,8 +613,126 @@
     </div>
   </div>
   <div class="voters" id="voters-list"></div>
-  <p class="note">Votes are shared live with everyone — the tally updates automatically. One vote per name; voting again switches your pick.</p>
+  <p class="note" data-i18n="note">Votes are shared live with everyone — the tally updates automatically. One vote per name; voting again switches your pick.</p>
 </footer>
+
+<!-- ── Language (EN / ES) ── -->
+<script>
+  window.__langListeners = [];
+  const I18N = {
+    en: {
+      docTitle: "Vegas Trip Options 🎰",
+      heroTitle: "Family Vegas Trip 2026",
+      heroSub: "Three options for the family, vote for your favorites!",
+      cdDays: "days", cdHrs: "hrs", cdMin: "min", cdSec: "sec",
+      cdDate: "🎰 until Vegas · Thursday, August 20, 2026",
+      banner: "👇 Pick your favorite and vote at the bottom of each card",
+      star4: "4-star", star3: "3-star",
+      perCouple: "per couple",
+      priceNoteTax: "3 nights (includes taxes)",
+      priceNote: "hotel · 3 nights",
+      tripDetails: "Trip Details",
+      lblDates: "Dates", valDates: "Thu, Aug 20 – Sun, Aug 23, 2026 (3 nights)",
+      lblRoom: "Room", valRoom: "Two queens · 2 guests",
+      lblPerks: "Perks", valPerks: "TBD",
+      breakdownTitle: "Estimated Cost Breakdown",
+      bdHotel: "Hotel (3 nights)",
+      bdFood: "Food & Entertainment est.", bdFoodVal: "not yet added",
+      bdTotal: "Total per couple",
+      voteBtn: "👍 Vote for This One",
+      visit: "Visit ↗",
+      titlePH: "Search Google for Planet Hollywood",
+      titleFL: "Search Google for The Flamingo",
+      titleNY: "Search Google for New York, New York",
+      tallyTitle: "🗳️ Family Vote Tally",
+      note: "Votes are shared live with everyone — the tally updates automatically. One vote per name; voting again switches your pick.",
+      modalTitle: "Cast Your Vote",
+      votingForDefault: "You're voting for…",
+      votingFor: "You're voting for: ",
+      namePlaceholder: "Your name (e.g. Mom, Uncle Rick…)",
+      cancel: "Cancel", submit: "🗳️ Submit Vote", saving: "Saving…",
+      voted: "Voted: ", noVotes: "No votes yet — be the first!",
+      errVotes: "⚠️ Could not load live votes — check Firestore is enabled & rules allow read.",
+      errSave: "Sorry — your vote could not be saved. Please try again."
+    },
+    es: {
+      docTitle: "Opciones de Viaje a Vegas 🎰",
+      heroTitle: "Viaje Familiar a Vegas 2026",
+      heroSub: "Tres opciones para la familia, ¡vota por tus favoritas!",
+      cdDays: "días", cdHrs: "hrs", cdMin: "min", cdSec: "seg",
+      cdDate: "🎰 hasta Las Vegas · jueves 20 de agosto de 2026",
+      banner: "👇 Elige tu favorita y vota al final de cada tarjeta",
+      star4: "4 estrellas", star3: "3 estrellas",
+      perCouple: "por pareja",
+      priceNoteTax: "3 noches (incluye impuestos)",
+      priceNote: "hotel · 3 noches",
+      tripDetails: "Detalles del viaje",
+      lblDates: "Fechas", valDates: "jue 20 ago – dom 23 ago 2026 (3 noches)",
+      lblRoom: "Habitación", valRoom: "Dos camas queen · 2 personas",
+      lblPerks: "Extras", valPerks: "Por confirmar",
+      breakdownTitle: "Desglose estimado de costos",
+      bdHotel: "Hotel (3 noches)",
+      bdFood: "Comida y entretenimiento (est.)", bdFoodVal: "aún no incluido",
+      bdTotal: "Total por pareja",
+      voteBtn: "👍 Votar por esta",
+      visit: "Visitar ↗",
+      titlePH: "Buscar Planet Hollywood en Google",
+      titleFL: "Buscar The Flamingo en Google",
+      titleNY: "Buscar New York, New York en Google",
+      tallyTitle: "🗳️ Conteo de votos familiar",
+      note: "Los votos se comparten en vivo con todos — el conteo se actualiza automáticamente. Un voto por nombre; volver a votar cambia tu elección.",
+      modalTitle: "Emite tu voto",
+      votingForDefault: "Estás votando por…",
+      votingFor: "Estás votando por: ",
+      namePlaceholder: "Tu nombre (ej. Mamá, Tío Rick…)",
+      cancel: "Cancelar", submit: "🗳️ Enviar voto", saving: "Guardando…",
+      voted: "Votaron: ", noVotes: "Aún no hay votos — ¡sé el primero!",
+      errVotes: "⚠️ No se pudieron cargar los votos en vivo — verifica que Firestore esté activo y las reglas permitan lectura.",
+      errSave: "Lo sentimos — no se pudo guardar tu voto. Inténtalo de nuevo."
+    }
+  };
+
+  window.getLang = function () { return window.__lang || 'en'; };
+  window.t = function (key) {
+    var d = I18N[window.getLang()] || I18N.en;
+    return d[key] != null ? d[key] : (I18N.en[key] != null ? I18N.en[key] : key);
+  };
+
+  function applyLang(lang) {
+    if (lang !== 'es') lang = 'en';
+    window.__lang = lang;
+    var d = I18N[lang];
+    document.documentElement.lang = lang;
+    document.title = d.docTitle;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n'); if (d[k] != null) el.textContent = d[k];
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n-title'); if (d[k] != null) el.setAttribute('title', d[k]);
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n-placeholder'); if (d[k] != null) el.setAttribute('placeholder', d[k]);
+    });
+    var btn = document.getElementById('lang-toggle');
+    if (btn) btn.textContent = lang === 'es' ? '🌐 English' : '🌐 Español';
+    try { localStorage.setItem('vegas-lang', lang); } catch (e) {}
+    try { var u = new URL(window.location); u.searchParams.set('lang', lang); history.replaceState(null, '', u); } catch (e) {}
+    window.__langListeners.forEach(function (fn) { try { fn(lang); } catch (e) {} });
+  }
+  window.applyLang = applyLang;
+
+  (function init() {
+    var q; try { q = new URL(window.location).searchParams.get('lang'); } catch (e) {}
+    var saved; try { saved = localStorage.getItem('vegas-lang'); } catch (e) {}
+    var nav = (navigator.language || 'en').toLowerCase().slice(0, 2);
+    var lang = (q === 'es' || q === 'en') ? q
+             : (saved === 'es' || saved === 'en') ? saved
+             : (nav === 'es' ? 'es' : 'en');
+    var btn = document.getElementById('lang-toggle');
+    if (btn) btn.addEventListener('click', function () { applyLang(window.getLang() === 'es' ? 'en' : 'es'); });
+    applyLang(lang);
+  })();
+</script>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -624,8 +759,10 @@
   const votesCol = collection(db, "votes");
 
   let pendingOption = '';
+  let latestDocs = [];
 
   function render(docs) {
+    latestDocs = docs;
     const counts = { a: 0, b: 0, c: 0 };
     const voters = [];
     docs.forEach(d => {
@@ -638,23 +775,30 @@
     document.getElementById('count-b').textContent = counts.b;
     document.getElementById('count-c').textContent = counts.c;
     const el = document.getElementById('voters-list');
-    el.textContent = voters.length ? 'Voted: ' + voters.join(' · ') : 'No votes yet — be the first!';
+    el.textContent = voters.length ? window.t('voted') + voters.join(' · ') : window.t('noVotes');
   }
+
+  // re-render dynamic text whenever the language is switched
+  window.__langListeners.push(() => {
+    render(latestDocs);
+    if (pendingOption && document.getElementById('modal').classList.contains('open')) {
+      document.getElementById('modal-option-text').textContent = window.t('votingFor') + pendingOption;
+    }
+  });
 
   // Live listener — every open page updates the moment anyone votes.
   onSnapshot(votesCol,
     snap => render(snap.docs),
     err => {
       console.error('Firestore listen failed:', err);
-      document.getElementById('voters-list').textContent =
-        '⚠️ Could not load live votes — check Firestore is enabled & rules allow read.';
+      document.getElementById('voters-list').textContent = window.t('errVotes');
     }
   );
 
   // ── Modal ──
   function openVote(option) {
     pendingOption = option;
-    document.getElementById('modal-option-text').textContent = `You're voting for: ${option}`;
+    document.getElementById('modal-option-text').textContent = window.t('votingFor') + option;
     document.getElementById('voter-name').value = '';
     document.getElementById('modal').classList.add('open');
     setTimeout(() => document.getElementById('voter-name').focus(), 100);
@@ -676,15 +820,15 @@
     // Doc id = lowercased name → re-voting overwrites (one vote per person).
     const id = name.toLowerCase();
     const btn = document.getElementById('modal-submit');
-    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+    if (btn) { btn.disabled = true; btn.textContent = window.t('saving'); }
     try {
       await setDoc(doc(db, "votes", id), { name, option });
       closeVote();
     } catch (e) {
       console.error('Vote failed:', e);
-      alert('Sorry — your vote could not be saved. Please try again.');
+      alert(window.t('errSave'));
     } finally {
-      if (btn) { btn.disabled = false; btn.textContent = '🗳️ Submit Vote'; }
+      if (btn) { btn.disabled = false; btn.textContent = window.t('submit'); }
     }
   }
 
