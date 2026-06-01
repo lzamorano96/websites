@@ -176,6 +176,31 @@
     .detail-row .label { color: var(--muted); min-width: 80px; }
     .detail-row .value { color: var(--text); flex: 1; }
 
+    /* clickable hotel name → Google search */
+    .hotel-link {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(240,192,64,.35);
+      transition: color .15s ease, border-color .15s ease;
+    }
+    .hotel-link:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .hotel-link .visit-cue {
+      margin-left: .4rem;
+      font-size: .72em;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: var(--gold);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity .15s ease, transform .15s ease;
+    }
+    .hotel-link:hover .visit-cue { opacity: 1; transform: translateX(0); }
+
     /* cost breakdown */
     .breakdown {
       padding: 1rem 1.5rem;
@@ -339,7 +364,7 @@
       <div class="detail-row">
         <span class="icon">🏨</span>
         <span class="label">Hotel</span>
-        <span class="value">Planet Hollywood<br><small style="color:var(--muted)">The Strip · ★ TBD</small></span>
+        <span class="value"><a class="hotel-link" href="https://www.google.com/search?q=Planet+Hollywood+Las+Vegas" target="_blank" rel="noopener" title="Search Google for Planet Hollywood">Planet Hollywood<span class="visit-cue">Visit ↗</span></a><br><small style="color:var(--muted)">The Strip · <span style="color:var(--gold)">★★★★</span> 4-star</small></span>
       </div>
       <div class="detail-row">
         <span class="icon">🛏️</span>
@@ -387,7 +412,7 @@
       <div class="detail-row">
         <span class="icon">🏨</span>
         <span class="label">Hotel</span>
-        <span class="value">The Flamingo<br><small style="color:var(--muted)">The Strip · ★ TBD</small></span>
+        <span class="value"><a class="hotel-link" href="https://www.google.com/search?q=Flamingo+Las+Vegas" target="_blank" rel="noopener" title="Search Google for The Flamingo">The Flamingo<span class="visit-cue">Visit ↗</span></a><br><small style="color:var(--muted)">The Strip · <span style="color:var(--gold)">★★★</span> 3-star</small></span>
       </div>
       <div class="detail-row">
         <span class="icon">🛏️</span>
@@ -435,7 +460,7 @@
       <div class="detail-row">
         <span class="icon">🏨</span>
         <span class="label">Hotel</span>
-        <span class="value">New York, New York<br><small style="color:var(--muted)">The Strip · ★ TBD</small></span>
+        <span class="value"><a class="hotel-link" href="https://www.google.com/search?q=New+York+New+York+Las+Vegas" target="_blank" rel="noopener" title="Search Google for New York, New York">New York, New York<span class="visit-cue">Visit ↗</span></a><br><small style="color:var(--muted)">The Strip · <span style="color:var(--gold)">★★★★</span> 4-star</small></span>
       </div>
       <div class="detail-row">
         <span class="icon">🛏️</span>
