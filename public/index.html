@@ -347,8 +347,15 @@
     .countdown .cd-timer {
       display: flex;
       justify-content: center;
-      gap: .75rem;
+      align-items: flex-start;
+      gap: .4rem;
       flex-wrap: wrap;
+    }
+    .countdown .cd-sep {
+      font-size: clamp(2rem, 7vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1;
+      color: var(--muted);
     }
     .countdown .cd-unit {
       display: flex;
@@ -390,8 +397,11 @@
   <div class="cd-card">
     <div class="cd-timer" id="cd-timer">
       <div class="cd-unit"><span class="cd-val" id="cd-days">--</span><span class="cd-u">days</span></div>
+      <span class="cd-sep">:</span>
       <div class="cd-unit"><span class="cd-val" id="cd-hours">--</span><span class="cd-u">hrs</span></div>
+      <span class="cd-sep">:</span>
       <div class="cd-unit"><span class="cd-val" id="cd-mins">--</span><span class="cd-u">min</span></div>
+      <span class="cd-sep">:</span>
       <div class="cd-unit"><span class="cd-val" id="cd-secs">--</span><span class="cd-u">sec</span></div>
     </div>
     <div class="cd-date">🎰 until Vegas · Thursday, August 20, 2026</div>
